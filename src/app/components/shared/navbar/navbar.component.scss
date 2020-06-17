@@ -1,0 +1,33 @@
+$gray: rgb(161, 161, 161);
+
+a {
+    color: $gray;
+}
+
+.navbar {
+    border-bottom: 2px solid rgb(209, 209, 209);
+}
+
+.nav-link {
+    padding: 0 !important;
+    margin: .5rem 1rem;
+}
+
+li:first-child a.nav-link {
+    margin-left: 0;
+}
+
+.nav-link > i.fa-leaf {
+    color: rgb(137, 211, 137) !important;
+}
+
+#shopping-cart a {
+    color: $gray;
+}
+
+#item-count {
+    margin-left: .2rem;
+    color: #000;
+    padding: 0 .5rem;
+    background-color: #ffc107;
+}

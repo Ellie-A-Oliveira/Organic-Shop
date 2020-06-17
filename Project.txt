@@ -1,0 +1,57 @@
+- Implement homepage
+    v.0.1.0
+
+
+HomePage {
+    U {
+        - Navbar with:
+            L {
+                - leaf icon
+                - cart icon
+                - number of items
+            }
+            R {
+                - Login button
+            }
+    }
+    L {
+        - Category panel {
+            F {
+                - All Categories
+                - (category name)
+                - ...
+            }
+        }
+    }
+    R {
+        - Items {
+            - item {
+                - img
+                - name
+                - price
+                - ADD TO CART button {
+                    C {
+                        - Minus button
+                        - (n of items) in cart
+                        - Plus button
+                    }
+                }
+            }
+        }
+    }
+}
+
+U: Up
+R: Right
+D: Down
+L: Left
+C: Click
+F: Function
+
+Deps:
+    - @ng-bootstrap/ng-bootstrap
+    - firebase
+    - @angular/fire
+    - angularx-social-login
+    - bootstrap
+    - @fortawesome/fontawesome-free

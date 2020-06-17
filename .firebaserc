@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "organic-shop-dani-a-b-o"
+  },
+  "targets": {
+    "organic-shop-dani-a-b-o": {
+      "hosting": {
+        "organic-shop": [
+          "organic-shop-dani-a-b-o"
+        ]
+      }
+    }
+  }
+}

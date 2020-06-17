@@ -1,0 +1,19 @@
+.buttons {
+    width: 100%;
+    overflow: hidden;
+}
+
+.btn {
+    width: inherit;
+}
+
+.next {
+    display: grid;
+    grid-template-columns: 50px auto 50px;
+}
+
+.next p {
+    position: relative;
+    place-self: center;
+    top: 20%;
+}
