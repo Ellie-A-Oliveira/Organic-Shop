@@ -1,11 +1,17 @@
 <div class="buttons">
     <button
+        *ngIf="quantity === 0"
+        (click)="addItem()"
         class="btn btn-secondary">ADD TO CART</button>
-    <div class="next">
+    <div
+        *ngIf="quantity !== 0"
+        class="next">
         <button
+            (click)="removeItem()"
             class="btn btn-secondary">-</button>
-        <p>1 in cart</p>
+        <p>{{ quantity }} in cart</p>
         <button
+            (click)="addItem()"
             class="btn btn-secondary">+</button>
     </div>
 </div>

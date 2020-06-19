@@ -1,11 +1,11 @@
 <div class="card">
     <img
         class="card-img-top"
-        src=""
+        [src]="item.imgUrl"
         alt="">
     <div class="card-body">
-        <h5 class="card-title">Name</h5>
-        <p class="card-text">Price</p>
+        <h5 class="card-title">{{ item.name }}</h5>
+        <p class="card-text">{{ item.price | currency }}</p>
     </div>
-    <app-add-to-cart></app-add-to-cart>
+    <app-add-to-cart [item]="item"></app-add-to-cart>
 </div>

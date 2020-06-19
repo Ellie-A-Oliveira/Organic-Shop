@@ -1,18 +1,7 @@
 <div class="row row-cols-2 justify-content-between">
     <div
+        *ngFor="let item of items | async"
         class="col-6 mb-4">
-        <app-item></app-item>
-    </div>
-    <div
-        class="col-6 mb-4">
-        <app-item></app-item>
-    </div>
-    <div
-        class="col-6 mb-4">
-        <app-item></app-item>
-    </div>
-    <div
-        class="col-6 mb-4">
-        <app-item></app-item>
+        <app-item [item]="item"></app-item>
     </div>
 </div>

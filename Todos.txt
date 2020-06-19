@@ -1,6 +1,6 @@
 - Beautify homepage
 - Set default theme instead of hardcoding colors
-- Implement categories
-- Implement items
-- Implement total items
-- navbar and categories container should be static
+// - Implement categories
+// - Implement items
+// - Implement total items
+// - navbar and categories container should be static
