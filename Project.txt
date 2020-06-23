@@ -55,3 +55,7 @@ Deps:
     - angularx-social-login
     - bootstrap
     - @fortawesome/fontawesome-free
+    - @angular-redux/store
+    - redux
+    - tassign
+    - redux-devtools-extension

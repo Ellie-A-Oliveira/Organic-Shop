@@ -1,6 +1,8 @@
 <ul class="list-group">
     <li class="list-group-item">All Categories</li>
     <li
-        *ngFor="let item of items | async"
-        class="list-group-item">{{ item.category }}</li>
+        *ngFor="let category of categories | async"
+        class="list-group-item">
+        <a (click)="filterBy(category)">{{ category }}</a>
+    </li>
 </ul>

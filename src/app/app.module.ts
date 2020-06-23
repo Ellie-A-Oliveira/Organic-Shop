@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { NgRedux, NgReduxModule } from '@angular-redux/store';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SocialLoginModule } from 'angularx-social-login'; // Check after
 
@@ -18,6 +19,9 @@ import { LoginComponent } from './components/shared/login/login.component';
 import { environment } from 'src/environments/environment';
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/shared/not-found/not-found.component';
+
+// Redux
+import { rootReducer, INITIAL_STATE, IAppState } from './store';
 
 @NgModule({
   declarations: [
@@ -37,9 +41,14 @@ import { NotFoundComponent } from './components/shared/not-found/not-found.compo
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     NgbModule,
-    SocialLoginModule
+    SocialLoginModule,
+    NgReduxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(ngRedux: NgRedux<IAppState>) {
+    ngRedux.configureStore(rootReducer, INITIAL_STATE);
+  }
+}
