@@ -27,7 +27,7 @@
     "angularx-social-login": "^3.0.0",
     "bootstrap": "^4.5.0",
     "firebase": "^7.15.1",
-    "redux": "^4.0.5",
+    "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
     "rxjs": "~6.5.4",
     "tassign": "^1.0.0",

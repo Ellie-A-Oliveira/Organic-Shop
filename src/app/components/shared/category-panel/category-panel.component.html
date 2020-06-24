@@ -1,8 +1,10 @@
 <ul class="list-group">
-    <li class="list-group-item">All Categories</li>
-    <li
-        *ngFor="let category of categories | async"
-        class="list-group-item">
-        <a (click)="filterBy(category)">{{ category }}</a>
-    </li>
+    <a (click)="filterBy(null); setActive($event.target)">
+        <li class="list-group-item active">All Categories</li>
+    </a>
+    <a
+        (click)="filterBy(category); setActive($event.target)"
+        *ngFor="let category of categories | async">
+        <li class="list-group-item">{{ category }}</li>
+    </a>
 </ul>

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Item } from 'src/app/models/item.model';
 import { ItemsService } from 'src/app/services/items.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { select } from '@angular-redux/store';
 import { IAppState } from 'src/app/store';
 
@@ -10,10 +10,9 @@ import { IAppState } from 'src/app/store';
   templateUrl: './category-panel.component.html',
   styleUrls: ['./category-panel.component.scss']
 })
-export class CategoryPanelComponent implements OnInit, OnDestroy {
-  private subs: Subscription;
+export class CategoryPanelComponent implements OnInit {
   @select((s: IAppState) => {
-    let categories = [];
+    const categories = [];
 
     Object.values(s.itemsState.items).map(item => item.category)
       .forEach(category => {
@@ -22,20 +21,32 @@ export class CategoryPanelComponent implements OnInit, OnDestroy {
         }
       });
     return categories;
-  }) categories: Array<any>;
+  }) categories: Observable<any[]>;
 
   constructor(
     private service: ItemsService
   ) { }
 
   ngOnInit(): void {
-    this.subs = this.service.getAll().subscribe();
   }
 
   filterBy(category: string) {
+    this.service.filter(category);
   }
 
-  ngOnDestroy() {
-    this.subs.unsubscribe();
+  setActive(li: HTMLLIElement) {
+    const ul = li.parentElement.parentElement;
+
+    for (let index = 0; index < ul.childElementCount; index++) {
+      const element = ul.children.item(index).children[0]; // li
+
+      if (element === li) {
+        element.classList.add('active');
+      } else {
+        if (element.classList.contains('active')) {
+          element.classList.remove('active');
+        }
+      }
+    }
   }
 }

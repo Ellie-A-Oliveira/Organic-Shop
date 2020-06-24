@@ -29,6 +29,8 @@ export class ItemsService {
   }
 
   add(item: Item) {
+    this.redux.dispatch({ type: actions.ADD_ITEM, body: item });
+
     return this.db.list(this.url).push(item);
   }
 
@@ -42,5 +44,9 @@ export class ItemsService {
 
   createItemId(): string {
     return this.db.createPushId();
+  }
+
+  filter(category: string) {
+    this.redux.dispatch({ type: actions.FILTER_ITEMS, body: category });
   }
 }

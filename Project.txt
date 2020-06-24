@@ -56,6 +56,6 @@ Deps:
     - bootstrap
     - @fortawesome/fontawesome-free
     - @angular-redux/store
-    - redux
+    - redux@4.0.1
     - tassign
     - redux-devtools-extension

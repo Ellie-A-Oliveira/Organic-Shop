@@ -3,7 +3,7 @@
 // - Implement categories
 // - Implement items
 // - Implement total items
-// - navbar and categories container should be static
-   - Implement category filtering
+// - Navbar and categories container should be static
+// - Implement category filtering
 // - Fix category duplicates
 // - Implement redux

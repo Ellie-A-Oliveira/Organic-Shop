@@ -1,6 +1,6 @@
 <div class="row row-cols-2 justify-content-between">
     <div
-        *ngFor="let item of items | async"
+        *ngFor="let item of filteredItems()"
         class="col-6 mb-4">
         <app-item [item]="item"></app-item>
     </div>
