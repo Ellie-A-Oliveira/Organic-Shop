@@ -3,6 +3,8 @@ import { CartItem } from './models/cart.model';
 import { CartService } from './services/cart.service';
 import { ItemsService } from './services/items.service';
 import { Subscription } from 'rxjs';
+import { NgRedux } from '@angular-redux/store';
+import { IAppState } from './store';
 
 @Component({
   selector: 'app-root',
@@ -16,11 +18,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private cartService: CartService,
-    private itemsService: ItemsService
+    private itemsService: ItemsService,
+    private redux: NgRedux<IAppState>
   ) {  }
 
   ngOnInit() {
-    this.cart = this.cartService.items;
+    this.cart = Object.values(this.redux.getState().cartState);
     this.itemsSubs = this.itemsService.getAll().subscribe();
   }
 

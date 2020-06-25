@@ -21,6 +21,25 @@ li:first-child a.nav-link {
     color: rgb(137, 211, 137) !important;
 }
 
+#cart-toggler {
+    margin: 0 .8rem !important;
+}
+
+#cart-toggler a {
+    padding: 0 0 !important;
+    margin: 0.5rem .2rem !important
+}
+
+#cart-preview {
+    position: fixed;
+    z-index: 999;
+    min-height: 5vh;
+    max-height: 50vh;
+    min-width: 20vw;
+    max-width: 30vw;
+    overflow: auto;
+}
+
 #shopping-cart a {
     color: $gray;
 }
@@ -30,4 +49,10 @@ li:first-child a.nav-link {
     color: #000;
     padding: 0 .5rem;
     background-color: #ffc107;
+}
+
+.cart-open {
+    border-top-left-radius: 20%;
+    border-top-right-radius: 20%;
+    box-shadow: 0 0 .3rem lightgray;
 }

@@ -1,84 +1,55 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Item } from '../models/item.model';
 import { CartItem } from '../models/cart.model';
+import { NgRedux } from '@angular-redux/store';
+import { ICartState } from '../stores/cart.store';
+import * as actions from '../stores/cart.actions';
+import { IAppState } from '../store';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  items: CartItem[] = [];
-  totalItems = 0;
-  totalItemsChanged = new EventEmitter();
 
-  constructor() { }
+  constructor(
+    private redux: NgRedux<ICartState>
+  ) { }
 
   addItem(item: Item) {
-    if (!this.items.some(cartItem => item.id === cartItem.itemId)) {
-      const newCartItem: CartItem = {
-        quantity: 0,
-        itemId: item.id,
-        item
-      };
-      this.items.push(newCartItem);
-    }
+    const cartItem: CartItem = {
+      quantity: 1,
+      item,
+      itemId: item.id
+    };
 
-    const index = this.getCartItemIndex(item);
-
-    this.updateQuantity(index, 'add');
-
-    this.totalItems++;
-    this.totalItemsChanged.emit(this.totalItems);
+    this.redux.dispatch({ type: actions.ADD_CART_ITEM, body: cartItem });
   }
 
   removeItem(item: Item) {
-    if (!this.items.some(cartItem => item.id === cartItem.itemId)) {
-      return;
-    }
-    const index = this.getCartItemIndex(item);
-    this.updateQuantity(index, 'remove');
-
-    if (this.items[index].quantity <= 0) {
-      this.items.splice(index, 1);
-    }
-
-    this.totalItems--;
-    this.totalItemsChanged.emit(this.totalItems);
+    const cartItem: CartItem = {
+      quantity: 1,
+      item,
+      itemId: item.id
+    };
+    this.redux.dispatch({ type: actions.REMOVE_CART_ITEM, body: cartItem });
   }
 
-  updateQuantity(index, action) {
-    if (typeof index === 'undefined') {
-      return false;
-    }
+  getTotalPrice(): Observable<number> {
+    return this.redux.select().pipe(
+      map((s: IAppState) => {
+        const cartItems = Object.values(s.cartState.cartItems);
+        let totalPrice = 0;
 
-    switch (action) {
-      case 'add':
-        this.items[index].quantity++;
-        break;
-      case 'remove':
-        this.items[index].quantity--;
-        break;
-      default:
-        return false;
-    }
-    return true;
-  }
+        cartItems.forEach(cartItem => {
+          console.log(cartItem.quantity * cartItem.item.price);
+          totalPrice += cartItem.quantity * cartItem.item.price;
+        });
 
-  getCartItemIndex(item): number {
-    let index: number;
+        return totalPrice;
+      })
+    );
 
-    for (let i = 0; i < this.items.length; i++) {
-      const cartItem = this.items[i];
-
-      if (cartItem.itemId === item.id) {
-        index = i;
-        break;
-      }
-    }
-
-
-    if (typeof index === 'undefined') {
-      return -1;
-    }
-    return index;
   }
 }

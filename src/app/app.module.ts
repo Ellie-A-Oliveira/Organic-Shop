@@ -1,9 +1,10 @@
 // Modules
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { NgRedux, NgReduxModule } from '@angular-redux/store';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SocialLoginModule } from 'angularx-social-login'; // Check after
 
@@ -22,6 +23,8 @@ import { NotFoundComponent } from './components/shared/not-found/not-found.compo
 
 // Redux
 import { rootReducer, INITIAL_STATE, IAppState } from './store';
+import { CartPreviewComponent } from './components/shared/cart-preview/cart-preview.component';
+import { devToolsEnhancer } from 'redux-devtools-extension';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,8 @@ import { rootReducer, INITIAL_STATE, IAppState } from './store';
     AddToCartComponent,
     LoginComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CartPreviewComponent
   ],
   imports: [
     BrowserModule,
@@ -42,13 +46,15 @@ import { rootReducer, INITIAL_STATE, IAppState } from './store';
     AngularFireDatabaseModule,
     NgbModule,
     SocialLoginModule,
-    NgReduxModule
+    NgReduxModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(ngRedux: NgRedux<IAppState>) {
-    ngRedux.configureStore(rootReducer, INITIAL_STATE);
+    const enhancer = isDevMode() ? [devToolsEnhancer({})] : [];
+    ngRedux.configureStore(rootReducer, INITIAL_STATE, [], enhancer);
   }
 }

@@ -7,3 +7,9 @@
 // - Implement category filtering
 // - Fix category duplicates
 // - Implement redux
+// - Implement cart preview
+
+- Implement Google login
+- Implement admin page
+- Implement checkout page
+- Implement route protection

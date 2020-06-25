@@ -1,0 +1,33 @@
+<ul class="list-group">
+    <li
+        *ngIf="(cartItems | async).length === 0"
+        class="list-group-item">
+        Your cart is empty.
+    </li>
+    <li
+        *ngFor="let cartItem of cartItems | async"
+        class="list-group-item">
+        <div class="media mb-2">
+            <img
+                class="mr-2 align-self-center"
+                [src]="cartItem.item.imgUrl"
+                alt="">
+            <div class="media-body">
+                <h5 class="card-title">{{ cartItem.item.name }}</h5>
+                <p class="card-text">{{ cartItem.item.price * cartItem.quantity | currency }}</p>
+            </div>
+        </div>
+        <app-add-to-cart [item]="cartItem.item"></app-add-to-cart>
+    </li>
+    <li
+        *ngIf="(cartItems | async).length !== 0"
+        class="list-group-item">
+        <div class="row">
+            <button
+                (click)="emptyCart()"
+                class="col-6 btn btn-light">Empty Cart</button>
+            <span
+                class="col-6 align-self-center">Total: {{ fetchTotalPrice | async | currency }}</span>
+        </div>
+    </li>
+</ul>

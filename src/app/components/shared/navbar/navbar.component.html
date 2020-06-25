@@ -9,13 +9,19 @@
                 </a>
             </li>
         
-            <li ngbNavItem>
+            <li id="cart-toggler" ngbNavItem>
                 <a
+                    (click)="toggleCartPreview()"
                     ngbNavLink>
-                        <i class="fas fa-shopping-cart">
-                            <span class="rounded-pill" id="item-count">{{ totalItems }}</span>
-                        </i>
+                    <i class="fas fa-shopping-cart">
+                        <span class="rounded-pill" id="item-count">{{ totalItems | async }}</span>
+                    </i>
                 </a>
+                <div
+                    id="cart-preview"
+                    class="collapse">
+                    <app-cart-preview></app-cart-preview>
+                </div>
             </li>
         </ul>
         <app-login></app-login>
