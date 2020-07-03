@@ -12,6 +12,14 @@ export const CART_INITIAL_STATE: ICartState = {
     totalCartItems: 0
 };
 
+function loadCart(state: ICartState, action: { type: string, body: ICartState }) {
+    return tassign(state, {
+        ...state,
+        cartItems: action.body.cartItems,
+        totalCartItems: action.body.totalCartItems
+    });
+}
+
 function addItem(state: ICartState, action: { type: string, body: CartItem }) {
     const totalItems = state.totalCartItems + action.body.quantity;
 
@@ -71,6 +79,8 @@ export function cartReducer(state: ICartState = CART_INITIAL_STATE, action) {
 
         case actions.REMOVE_CART_ITEM: return removeItem(state, action);
         case actions.REMOVE_CART_ITEMS: return removeItems(state, action);
+
+        case actions.LOAD_CART: return loadCart(state, action);
 
         default: return state;
     }

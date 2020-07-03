@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CartService } from 'src/app/services/cart.service';
 import { select } from '@angular-redux/store';
 import { IAppState } from 'src/app/store';
 import { Observable } from 'rxjs';
+import { SocialAuthService } from 'angularx-social-login';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 export class NavbarComponent implements OnInit {
   @select((s: IAppState) => s.cartState.totalCartItems) totalItems: Observable<number>;
 
-  constructor() { }
+  constructor(private authService: SocialAuthService) { }
 
   ngOnInit(): void {
   }
@@ -24,10 +24,11 @@ export class NavbarComponent implements OnInit {
     if (cartEl.classList.contains('show')) {
       cartEl.classList.remove('show');
       cartToggler.classList.remove('cart-open');
+      cartToggler.firstElementChild.classList.replace('cart-preview-open', 'cart-preview-closed');
     } else {
       cartEl.classList.add('show');
       cartToggler.classList.add('cart-open');
+      cartToggler.firstElementChild.classList.replace('cart-preview-closed', 'cart-preview-open');
     }
   }
-
 }

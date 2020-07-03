@@ -5,6 +5,8 @@ import { ItemsService } from './services/items.service';
 import { Subscription } from 'rxjs';
 import { NgRedux } from '@angular-redux/store';
 import { IAppState } from './store';
+import { LocalStorageService } from './services/local-storage.service';
+import * as actions from './stores/cart.actions';
 
 @Component({
   selector: 'app-root',
@@ -19,12 +21,17 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private cartService: CartService,
     private itemsService: ItemsService,
-    private redux: NgRedux<IAppState>
+    private redux: NgRedux<IAppState>,
+    private localSt: LocalStorageService
   ) {  }
 
   ngOnInit() {
     this.cart = Object.values(this.redux.getState().cartState);
     this.itemsSubs = this.itemsService.getAll().subscribe();
+
+    if (this.localSt.cart) {
+      this.redux.dispatch({ type: actions.LOAD_CART, body: JSON.parse(this.localSt.cart) });
+    }
   }
 
   ngOnDestroy() {

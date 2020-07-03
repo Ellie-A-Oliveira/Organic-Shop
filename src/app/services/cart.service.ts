@@ -1,20 +1,23 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Item } from '../models/item.model';
 import { CartItem } from '../models/cart.model';
-import { NgRedux } from '@angular-redux/store';
+import { NgRedux, select } from '@angular-redux/store';
 import { ICartState } from '../stores/cart.store';
 import * as actions from '../stores/cart.actions';
 import { IAppState } from '../store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  @select((s: IAppState) => s.cartState) cart: Observable<CartItem>;
 
   constructor(
-    private redux: NgRedux<ICartState>
+    private redux: NgRedux<ICartState>,
+    private localSt: LocalStorageService
   ) { }
 
   addItem(item: Item) {
@@ -25,6 +28,7 @@ export class CartService {
     };
 
     this.redux.dispatch({ type: actions.ADD_CART_ITEM, body: cartItem });
+    this.updateLocalCart();
   }
 
   removeItem(item: Item) {
@@ -34,6 +38,7 @@ export class CartService {
       itemId: item.id
     };
     this.redux.dispatch({ type: actions.REMOVE_CART_ITEM, body: cartItem });
+    this.updateLocalCart();
   }
 
   getTotalPrice(): Observable<number> {
@@ -43,7 +48,6 @@ export class CartService {
         let totalPrice = 0;
 
         cartItems.forEach(cartItem => {
-          console.log(cartItem.quantity * cartItem.item.price);
           totalPrice += cartItem.quantity * cartItem.item.price;
         });
 
@@ -51,5 +55,11 @@ export class CartService {
       })
     );
 
+  }
+
+  updateLocalCart() {
+    this.cart.subscribe(
+      cartObj => this.localSt.cart = JSON.stringify(cartObj)
+    );
   }
 }

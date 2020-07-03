@@ -27,7 +27,7 @@ li:first-child a.nav-link {
 
 #cart-toggler a {
     padding: 0 0 !important;
-    margin: 0.5rem .2rem !important
+    margin: 0.5rem .2rem !important;
 }
 
 #cart-preview {
@@ -55,4 +55,19 @@ li:first-child a.nav-link {
     border-top-left-radius: 20%;
     border-top-right-radius: 20%;
     box-shadow: 0 0 .3rem lightgray;
+    background-color: lightgray;
+}
+
+.cart-preview-closed::after {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    margin-left: .2rem;
+    content: '\f0d7';
+}
+
+.cart-preview-open::after {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    margin-left: .2rem;
+    content: '\f0d8';
 }

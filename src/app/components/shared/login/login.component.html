@@ -1,1 +1,32 @@
-<a routerLink="" class="btn btn-light">Login</a>
+<div *ngIf="currentUser | async as user; else notLoggedIn">
+    <div
+        *ngIf="user"
+        ngbDropdown>
+        <button class="btn btn-light" ngbDropdownToggle>{{ user.name }}</button>
+        <div ngbDropdownMenu>
+            <a 
+                routerLink="my/orders" 
+                ngbDropdownItem
+                routerLinkActive="active">My Orders</a>
+            <a
+                *ngIf="user.isAdmin"
+                routerLink="admin/orders"
+                ngbDropdownItem
+                routerLinkActive="active">Manage Orders</a>
+            <a 
+                *ngIf="user.isAdmin"
+                routerLink="admin/products" 
+                ngbDropdownItem
+                routerLinkActive="active">Manage Products</a>
+            <a (click)="signOut()" ngbDropdownItem>Log Out</a>
+        </div>
+    </div>
+</div>
+
+<ng-template
+    #notLoggedIn>
+    <a
+        (click)="signIn()"
+        routerLink=""
+        class="btn btn-light">Login</a>
+</ng-template>

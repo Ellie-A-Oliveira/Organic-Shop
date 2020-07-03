@@ -6,7 +6,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { NgRedux, NgReduxModule } from '@angular-redux/store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SocialLoginModule } from 'angularx-social-login'; // Check after
+import { SocialLoginModule } from 'angularx-social-login';
 
 // Components
 import { AppRoutingModule } from './app-routing.module';
@@ -26,6 +26,13 @@ import { rootReducer, INITIAL_STATE, IAppState } from './store';
 import { CartPreviewComponent } from './components/shared/cart-preview/cart-preview.component';
 import { devToolsEnhancer } from 'redux-devtools-extension';
 
+// Social Login
+import { SocialAuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
+import { AdminComponent } from './components/admin/admin.component';
+import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
+import { AdminProductsComponent } from './components/admin-products/admin-products.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +44,11 @@ import { devToolsEnhancer } from 'redux-devtools-extension';
     LoginComponent,
     HomeComponent,
     NotFoundComponent,
-    CartPreviewComponent
+    CartPreviewComponent,
+    AdminComponent,
+    AdminOrdersComponent,
+    AdminProductsComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +60,22 @@ import { devToolsEnhancer } from 'redux-devtools-extension';
     NgReduxModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '251278277942-3qvc4p0egq3n8mgetjao0i04l905o6dl.apps.googleusercontent.com'
+            ),
+          }
+        ]
+      } as SocialAuthServiceConfig
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

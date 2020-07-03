@@ -9,7 +9,9 @@
 // - Implement redux
 // - Implement cart preview
 
-- Implement Google login
-- Implement admin page
+//- Implement Google login
+! need to implement db and modify localStorage, do NOT store socialUser
+// - Implement admin page
+
 - Implement checkout page
-- Implement route protection
+// - Implement route protection
