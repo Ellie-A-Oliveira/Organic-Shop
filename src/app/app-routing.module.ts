@@ -8,13 +8,23 @@ import { AdminProductsComponent } from './components/admin-products/admin-produc
 import { LoginComponent } from './components/shared/login/login.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AdminGuard } from './auth/admin.guard';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { OrderCompleteComponent } from './components/order-complete/order-complete.component';
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'checkout', component: CheckoutComponent },
-  { path: 'admin', component: AdminComponent, children: [
+  { path: 'shopping-cart', component: ShoppingCartComponent },
+  { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
+  { path: 'thank-you', component: OrderCompleteComponent, canActivate: [AuthGuard] },
+  { path: 'my', children: [
+    { path: '', pathMatch: 'full', redirectTo: 'orders' },
+    { path: 'orders', component: MyOrdersComponent }
+  ], canActivate: [AuthGuard] },
+  { path: 'admin', children: [
+    { path: '', pathMatch: 'full', redirectTo: 'orders' },
     { path: 'orders', component: AdminOrdersComponent },
     { path: 'products', component: AdminProductsComponent },
   ], canActivate: [AuthGuard, AdminGuard] },

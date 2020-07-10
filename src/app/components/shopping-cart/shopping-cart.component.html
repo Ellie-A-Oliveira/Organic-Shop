@@ -1,0 +1,31 @@
+<ul class="list-group">
+    <li
+        *ngFor="let cartItem of cartItems | async"
+        class="list-group-item">
+        <div class="media">
+            <img
+                [src]="cartItem.item.imgUrl"
+                class="mr-3 rounded-circle border"
+                alt="">
+            <div class="media-body row">
+                <div class="col-4">
+                    <h5>{{ cartItem.item.name }}</h5>
+                </div>
+                <div class="col-6">
+                    <app-add-to-cart [item]="cartItem.item"></app-add-to-cart>
+                </div>
+                <div class="col-2">
+                    <h5>{{ cartItem.item.price * cartItem.quantity | currency }}</h5>
+                </div>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <h5 id="total-price">{{ fetchTotalPrice | async | currency }}</h5>
+    </li>
+    <li class="list-group-item">
+        <a
+            routerLink="../checkout"
+            class="btn btn-primary">Check Out</a>
+    </li>
+</ul>

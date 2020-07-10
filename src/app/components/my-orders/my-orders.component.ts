@@ -3,16 +3,14 @@ import { Observable } from 'rxjs';
 import { OrderService } from 'src/app/services/order.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ViewOrderComponent } from '../view-order/view-order.component';
-import { convertObjtoArr } from 'src/app/helper-functions/convertObjtoArr.helper';
 
 @Component({
-  selector: 'app-admin-orders',
-  templateUrl: './admin-orders.component.html',
-  styleUrls: ['./admin-orders.component.scss']
+  selector: 'app-my-orders',
+  templateUrl: './my-orders.component.html',
+  styleUrls: ['./my-orders.component.scss']
 })
-export class AdminOrdersComponent implements OnInit {
+export class MyOrdersComponent implements OnInit {
   $orders: Observable<any>;
-  converter = convertObjtoArr;
 
   constructor(
     private orderService: OrderService,
@@ -20,7 +18,7 @@ export class AdminOrdersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.$orders = this.orderService.getAllOrders();
+    this.$orders = this.orderService.getUserOrders();
   }
 
   viewOrder(order) {

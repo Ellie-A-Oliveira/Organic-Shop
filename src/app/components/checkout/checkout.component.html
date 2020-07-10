@@ -1,6 +1,64 @@
+<h1 class="mb-4">Shipping</h1>
 
-<div
-    *ngFor="let cartItem of cartItems | async"
-    class="card">
-    <app-item [item]="cartItem.item"></app-item>
+<div class="row">
+    <div class="col-6">
+
+        <form [formGroup]="form" (ngSubmit)="submit()">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input
+                    formControlName="name"
+                    id="name"
+                    class="form-control"
+                    type="text">
+            </div>
+        
+            <div formGroupName="address" class="form-group">
+                <label for="address1">Address</label>
+                <input
+                    formControlName="street"
+                    id="address1"
+                    class="form-control"
+                    type="text"
+                    placeholder="Line 1">
+                <input
+                    formControlName="complement"
+                    id="address2"
+                    class="form-control mt-3"
+                    type="text"
+                    placeholder="Line 2">
+
+                <label class="mt-2" for="city">City</label>
+                <input
+                    formControlName="city"
+                    id="city"
+                    class="form-control"
+                    type="text">
+            </div>
+        
+            <button
+                class="btn btn-primary">Place Order</button>
+        </form>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <h2>Order Summary</h2>
+                <div *ngIf="$cart | async as cart">
+                    <p>You have {{ cart.totalCartItems }} items in your shopping cart.</p>
+                    <table class="table">
+                        <tbody>
+                            <tr *ngFor="let cartItem of converter(cart.cartItems)">
+                                <td>{{ cartItem.quantity }} x {{ cartItem.item.name }}</td>
+                                <td class="text-right">{{ cartItem.item.price * cartItem.quantity | currency }}</td>
+                            </tr>
+                            <tr>
+                                <td class="font-weight-bold">Total</td>
+                                <td class="text-right">{{ fetchTotalPrice | async | currency }}</td>
+                            </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

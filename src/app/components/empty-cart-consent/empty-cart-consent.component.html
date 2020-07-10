@@ -1,0 +1,7 @@
+<div class="container mb-4">
+    <h2 class="text-center">Are you sure you want to empty your cart?</h2>
+    <div mat-dialog-actions class="justify-content-end">
+        <button class="btn btn-primary" (click)="onNoClick()" cdkFocusInitial>No</button>
+        <button class="btn btn-secondary ml-2" [mat-dialog-close]='true'>Yes</button>
+    </div>
+</div>

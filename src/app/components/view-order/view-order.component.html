@@ -1,0 +1,18 @@
+<table class="table table-hover">
+    <thead>
+        <th>Product</th>
+        <th class="text-center">Quantity</th>
+        <th class="text-right">Total</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let cartItem of order.cart">
+            <td>{{ cartItem.item.name }}</td>
+            <td class="text-center">{{ cartItem.quantity }}</td>
+            <td class="text-right">{{ cartItem.quantity * cartItem.item.price | currency}}</td>
+        </tr>
+        <tr>
+            <td class="font-weight-bold">Total</td>
+            <td class="text-right font-weight-bold" colspan="2">{{ order.totalPrice | currency }}</td>
+        </tr>
+    </tbody>
+</table>

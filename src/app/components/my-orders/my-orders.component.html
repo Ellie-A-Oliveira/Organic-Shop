@@ -1,0 +1,15 @@
+
+<table *ngIf="$orders | async as orders" class="table">
+    <thead>
+        <th>Date</th>
+        <th>Order Items</th>
+        <th>Total Price</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let order of orders">
+            <td>{{ order.date }}</td>
+            <td><button (click)="viewOrder(order)" class="btn btn-primary">View</button></td>
+            <td>{{ order.totalPrice | currency }}</td>
+        </tr>
+    </tbody>
+</table>

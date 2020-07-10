@@ -5,11 +5,13 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { NgRedux, NgReduxModule } from '@angular-redux/store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SocialLoginModule } from 'angularx-social-login';
+import { AppRoutingModule } from './app-routing.module';
 
 // Components
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { CategoryPanelComponent } from './components/shared/category-panel/category-panel.component';
@@ -17,9 +19,9 @@ import { ItemsComponent } from './components/shared/items/items.component';
 import { ItemComponent } from './components/shared/item/item.component';
 import { AddToCartComponent } from './components/shared/add-to-cart/add-to-cart.component';
 import { LoginComponent } from './components/shared/login/login.component';
-import { environment } from 'src/environments/environment';
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/shared/not-found/not-found.component';
+import { environment } from 'src/environments/environment';
 
 // Redux
 import { rootReducer, INITIAL_STATE, IAppState } from './store';
@@ -31,7 +33,12 @@ import { SocialAuthServiceConfig, GoogleLoginProvider } from 'angularx-social-lo
 import { AdminComponent } from './components/admin/admin.component';
 import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { EmptyCartConsentComponent } from './components/empty-cart-consent/empty-cart-consent.component';
+import { OrderCompleteComponent } from './components/order-complete/order-complete.component';
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { ViewOrderComponent } from './components/view-order/view-order.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +55,12 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     AdminComponent,
     AdminOrdersComponent,
     AdminProductsComponent,
-    CheckoutComponent
+    ShoppingCartComponent,
+    CheckoutComponent,
+    EmptyCartConsentComponent,
+    OrderCompleteComponent,
+    MyOrdersComponent,
+    ViewOrderComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +70,10 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     NgbModule,
     SocialLoginModule,
     NgReduxModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     {

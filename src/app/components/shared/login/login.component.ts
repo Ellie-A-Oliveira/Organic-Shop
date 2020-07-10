@@ -3,6 +3,7 @@ import { SocialAuthService, GoogleLoginProvider, SocialUser } from 'angularx-soc
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: SocialAuthService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -54,5 +56,6 @@ export class LoginComponent implements OnInit {
     }
 
     this.currentUser = undefined;
+    this.router.navigate(['/']);
   }
 }

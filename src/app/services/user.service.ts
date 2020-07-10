@@ -23,4 +23,10 @@ export class UserService {
     }
     return false;
   }
+
+  currentUser() {
+    if (this.isLoggedIn) {
+      return this.local.currentUser;
+    }
+  }
 }

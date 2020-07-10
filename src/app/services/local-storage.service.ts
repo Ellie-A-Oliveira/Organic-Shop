@@ -26,4 +26,8 @@ export class LocalStorageService {
   set cart(cartObj) {
     localStorage.setItem('local-cart', cartObj);
   }
+
+  removeCart() {
+    localStorage.removeItem('local-cart');
+  }
 }

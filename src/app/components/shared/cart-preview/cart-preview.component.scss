@@ -7,6 +7,12 @@ ul, li {
 }
 
 .media img {
-    width: 3vw;
+    width: 4.5vw;
+    height: 4.5vw;
     object-fit: contain;
+}
+
+.row {
+    margin-right: 0;
+    margin-left: 0;
 }

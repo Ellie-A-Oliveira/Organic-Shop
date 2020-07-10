@@ -1,5 +1,5 @@
-<ul class="list-group">
-    <div *ngIf="cartItems | async as cartItems">
+<div *ngIf="cartItems | async as cartItems">
+    <ul class="list-group">
         <li
             *ngIf="cartItems.length === 0"
             class="list-group-item">
@@ -10,7 +10,7 @@
             class="list-group-item">
             <div class="media mb-2">
                 <img
-                    class="mr-2 align-self-center"
+                    class="mr-2 align-self-center border rounded-circle"
                     [src]="cartItem.item.imgUrl"
                     alt="">
                 <div class="media-body">
@@ -26,17 +26,19 @@
             <div class="row">
                 <button
                     (click)="emptyCart()"
-                    class="col-6 btn btn-light">Empty Cart</button>
+                    class="col-6 btn btn-light align-self-center">Empty Cart</button>
                 <span
                     class="col-6 align-self-center">Total: {{ fetchTotalPrice | async | currency }}</span>
             </div>
         </li>
         <li
             *ngIf="cartItems.length > 0"
-            class="list-group-item">
+            class="list-group-item"
+            id="go-to-cart">
             <button
-                routerLink="checkout"
-                class="btn btn-primary">Go to checkout</button>
+                (click)="closePreviewF()"
+                routerLink="shopping-cart"
+                class="btn btn-primary w-100">Go to cart</button>
         </li>
-    </div>
-</ul>
+    </ul>
+</div>
