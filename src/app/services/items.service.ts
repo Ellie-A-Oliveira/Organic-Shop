@@ -31,7 +31,7 @@ export class ItemsService {
   add(item: Item) {
     this.redux.dispatch({ type: actions.ADD_ITEM, body: item });
 
-    return this.db.list(this.url).push(item);
+    return this.db.object(this.url + '/' + item.id).set(item);
   }
 
   update(item: Item) {

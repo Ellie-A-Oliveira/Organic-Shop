@@ -1,8 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { select } from '@angular-redux/store';
 import { IAppState } from 'src/app/store';
 import { Observable } from 'rxjs';
-import { SocialAuthService } from 'angularx-social-login';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +11,7 @@ import { SocialAuthService } from 'angularx-social-login';
 export class NavbarComponent implements OnInit {
   @select((s: IAppState) => s.cartState.totalCartItems) totalItems: Observable<number>;
 
-  constructor(private authService: SocialAuthService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

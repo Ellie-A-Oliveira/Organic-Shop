@@ -1,0 +1,56 @@
+<div class="row" *ngIf="item | async as item">
+    <div class="col-7">
+        <form>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input
+                    [(ngModel)]="item.name"
+                    name="name"
+                    [value]="item.name"
+                    class="form-control"
+                    type="text">
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input
+                        [(ngModel)]="item.price"
+                        name="price"
+                        [value]="item.price"
+                        type="text"
+                        class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <input
+                    [(ngModel)]="item.category"
+                    name="category"
+                    [value]="item.category"
+                    type="text"
+                    class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="imgUrl">Image URL</label>
+                <input
+                    [(ngModel)]="item.imgUrl"
+                    name="imgUrl"
+                    [value]="item.imgUrl"
+                    type="text"
+                    class="form-control">
+            </div>
+        </form>
+        <button
+            (click)="updateProduct(item)"
+            class="btn btn-primary">Save</button>
+        <button
+            (click)="deleteProduct(item)"
+            class="btn btn-danger ml-1">Delete</button>
+    </div>
+    <div class="col-5">
+        <app-item [item]="item" [isPreview]="true"></app-item>
+    </div>
+</div>

@@ -1,25 +1,76 @@
-<button
-    class="btn btn-primary mb-2">New Product</button>
-<input
-    type="text"
-    placeholder="Search..."
-    class="form-control mb-3">
+<div
+    *ngIf="!actionSelected else action"
+    class="main">
+    <button
+        (click)="createProduct()"
+        class="btn btn-primary mb-2">New Product</button>
+    <input
+        *ngIf="items"
+        type="search"
+        #searchInput
+        (keyup)="onSearch(searchInput.value)"
+        placeholder="Search..."
+        class="form-control mb-3">
+    
+    <table
+        *ngIf="items"
+        id="items-table"
+        class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th
+                    (click)="orderBy('#')"
+                    role="button">
+                    #
+                    <span
+                        *ngIf="numOrder.selected"
+                        class="align-self-end">
+                        <i *ngIf="numOrder.order === 'asc'" class="fas fa-arrow-up"></i>
+                        <i *ngIf="numOrder.order === 'des'" class="fas fa-arrow-down"></i>
+                    </span>
+                </th>
+                <th 
+                    (click)="orderBy('Title')"
+                    role="button">
+                    Title
+                    <span
+                        *ngIf="titleOrder.selected"
+                        class="align-self-end">
+                        <i *ngIf="titleOrder.order === 'asc'" class="fas fa-arrow-up"></i>
+                        <i *ngIf="titleOrder.order === 'des'" class="fas fa-arrow-down"></i>
+                    </span>
+                </th>
+                <th 
+                    (click)="orderBy('Price')"
+                    role="button">
+                    Price
+                    <span
+                        *ngIf="priceOrder.selected">
+                        <i *ngIf="priceOrder.order === 'asc'" class="fas fa-arrow-up"></i>
+                        <i *ngIf="priceOrder.order === 'des'" class="fas fa-arrow-down"></i>
+                    </span>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of filteredItems">
+                <td>{{ filteredItems.indexOf(item) + 1 }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.price | currency }}</td>
+                <td>
+                    <button
+                        (click)="editProduct(item)"
+                        class="btn btn-secondary">Edit</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
-<table class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Price</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>1</td>
-            <td>Title</td>
-            <td>Price</td>
-            <td>Edit</td>
-        </tr>
-    </tbody>
-</table>
+<ng-template #action>
+    <router-outlet></router-outlet>
+    <button
+        (click)="toggleActionSelected()"
+        class="btn btn-secondary">Back</button>
+</ng-template>

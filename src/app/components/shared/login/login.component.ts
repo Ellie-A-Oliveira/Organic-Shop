@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SocialAuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: SocialAuthService,
     private localStorageService: LocalStorageService,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -38,6 +39,11 @@ export class LoginComponent implements OnInit {
 
         this.currentUser = Promise.resolve(user);
         this.localStorageService.currentUser = JSON.stringify(user);
+
+        if (this.userService.redirectUrl) {
+          this.router.navigate([this.userService.redirectUrl]);
+          this.userService.redirectUrl = null;
+        }
       });
   }
 

@@ -56,7 +56,7 @@ export class CartPreviewComponent implements OnInit, OnDestroy {
           this.localSt.removeCart();
         }
       }
-    )
+    );
   }
 
   get fetchTotalPrice() {

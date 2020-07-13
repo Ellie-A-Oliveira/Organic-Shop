@@ -8,6 +8,7 @@ import { Item } from 'src/app/models/item.model';
 })
 export class ItemComponent implements OnInit {
   @Input('item') item: Item;
+  @Input('isPreview') isPreview = false;
 
   constructor() { }
 

@@ -39,6 +39,10 @@ import { EmptyCartConsentComponent } from './components/empty-cart-consent/empty
 import { OrderCompleteComponent } from './components/order-complete/order-complete.component';
 import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import { ViewOrderComponent } from './components/view-order/view-order.component';
+import { EditProductComponent } from './components/edit-product/edit-product.component';
+import { NewProductComponent } from './components/new-product/new-product.component';
+import { DeleteItemConsentComponent } from './components/delete-item-consent/delete-item-consent.component';
+import { UpdateSuccessfulComponent } from './components/update-successful/update-successful.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +64,11 @@ import { ViewOrderComponent } from './components/view-order/view-order.component
     EmptyCartConsentComponent,
     OrderCompleteComponent,
     MyOrdersComponent,
-    ViewOrderComponent
+    ViewOrderComponent,
+    EditProductComponent,
+    NewProductComponent,
+    DeleteItemConsentComponent,
+    UpdateSuccessfulComponent
   ],
   imports: [
     BrowserModule,

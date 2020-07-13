@@ -7,5 +7,7 @@
         <h5 class="card-title">{{ item.name }}</h5>
         <p class="card-text">{{ item.price | currency }}</p>
     </div>
-    <app-add-to-cart [item]="item"></app-add-to-cart>
+    <div *ngIf="!isPreview">
+        <app-add-to-cart [item]="item"></app-add-to-cart>
+    </div>
 </div>

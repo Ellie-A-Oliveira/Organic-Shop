@@ -12,6 +12,8 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { OrderCompleteComponent } from './components/order-complete/order-complete.component';
 import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { EditProductComponent } from './components/edit-product/edit-product.component';
+import { NewProductComponent } from './components/new-product/new-product.component';
 
 
 const routes: Routes = [
@@ -26,7 +28,10 @@ const routes: Routes = [
   { path: 'admin', children: [
     { path: '', pathMatch: 'full', redirectTo: 'orders' },
     { path: 'orders', component: AdminOrdersComponent },
-    { path: 'products', component: AdminProductsComponent },
+    { path: 'products', component: AdminProductsComponent, children: [
+      { path: 'edit/:itemId', component: EditProductComponent },
+      { path: 'new', component: NewProductComponent },
+    ] },
   ], canActivate: [AuthGuard, AdminGuard] },
   { path: 'login', component: LoginComponent },
   { path: '**', component: NotFoundComponent },
